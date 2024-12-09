@@ -1,0 +1,127 @@
+{
+  "incoming_emails": [
+    {
+      "id": "1",
+      "theme": "Приглашение на собеседование",
+      "from": "ArseniyK1",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "25-04-2023"
+    },
+    {
+      "id": "2",
+      "theme": "Уведомление о посылке",
+      "from": "GlebK2002",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "24-05-2022"
+    },
+    {
+      "id": "3",
+      "theme": "Подтверждение регистрации",
+      "from": "AnnaS1990",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "15-06-2023"
+    },
+    {
+      "id": "4",
+      "theme": "Уведомление о посылке",
+      "from": "GlebK2002",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "24-05-2022"
+    },
+    {
+      "id": "5",
+      "theme": "Уведомление о посылке",
+      "from": "GlebK2002",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "24-05-2022"
+    }
+  ],
+  "outgoing_emails": [
+    {
+      "id": "1",
+      "theme": "Ответ на приглашение на собеседование",
+      "to": "ArseniyK1",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "26-04-2023"
+    },
+    {
+      "id": "2",
+      "theme": "Подтверждение получения посылки",
+      "to": "GlebK2002",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "25-05-2022"
+    },
+    {
+      "id": "3",
+      "theme": "Запрос дополнительной информации",
+      "to": "AnnaS1990",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "16-06-2023"
+    },
+    {
+      "id": "4",
+      "theme": "Изменение времени встречи",
+      "to": "DmitryP1985",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "11-07-2023"
+    },
+    {
+      "id": "5",
+      "theme": "Запрос на возврат товара",
+      "to": "ElenaV1995",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "23-08-2023"
+    },
+    {
+      "id": "0ab5",
+      "theme": "Резюме",
+      "to": "МедСофт",
+      "text": "Какой то текст",
+      "date": "03-12-2024"
+    },
+    {
+      "id": "8352",
+      "theme": "Здарова",
+      "to": "Саша",
+      "text": "Какой то текст",
+      "date": "04-11-2024"
+    },
+    {
+      "id": "2088",
+      "theme": "Здарова",
+      "to": "Саша",
+      "text": "Какой то текст",
+      "date": "04-11-2024"
+    },
+    {
+      "id": "f95b",
+      "recipientEmail": "тест",
+      "subject": "тест",
+      "text": "123"
+    },
+    {
+      "id": "01e7",
+      "recipientEmail": "1",
+      "subject": "",
+      "text": ""
+    },
+    {
+      "id": "e0ac",
+      "recipientEmail": "1 ",
+      "subject": "",
+      "text": ""
+    },
+    {
+      "id": "2cfd",
+      "recipientEmail": "1",
+      "subject": "1",
+      "text": ""
+    },
+    {
+      "id": "3c16",
+      "recipientEmail": "",
+      "subject": "",
+      "text": ""
+    }
+  ]
+}

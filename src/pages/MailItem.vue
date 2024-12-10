@@ -1,27 +1,21 @@
-<!-- src/components/MailItem.vue -->
 <template>
-  <q-page v-if="selectedMail" class="q-pa-md">
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">{{ selectedMail.theme }}</div>
-        <div class="text-subtitle2">{{ selectedMail.from }}</div>
-        <div class="text-subtitle2">{{ selectedMail.date }}</div>
-      </q-card-section>
-      <q-card-section>
-        <div class="q-pa-sm">{{ selectedMail.text }}</div>
-      </q-card-section>
-    </q-card>
-  </q-page>
+  <q-card>
+    <q-card-section>
+      <div class="text-h6">{{ !!data.theme ? data.theme : "" }}</div>
+      <div class="text-subtitle2">{{ data.from }}</div>
+      <div class="text-subtitle2">{{ data.date }}</div>
+    </q-card-section>
+    <q-card-section>
+      <div class="q-pa-sm">{{ data.text }}</div>
+    </q-card-section>
+  </q-card>
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useMailStore } from "src/store/mailStore";
-
-const mailStore = useMailStore();
-const selectedMail = computed(() => mailStore.selectedMail); // Получаем выбранное письмо из хранилища
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => {},
+  },
+});
 </script>
-
-<style scoped>
-/* Стили для письма */
-</style>

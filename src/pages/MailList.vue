@@ -1,27 +1,14 @@
 <template>
   <q-page>
     <q-list bordered>
-      <q-item
-        v-for="mail in items"
-        :key="mail.id"
-        clickable
-        @click="selectMail(mail.id)"
+      <mail-item-list
+        @delete-message="deleteMessage"
+        @open-message="selectMail"
+        v-for="element in items"
+        :key="element.id"
+        :data="element"
       >
-        <q-item-section>
-          <q-item-label>{{ mail.theme }}</q-item-label>
-          <q-item-label caption>{{ mail.from }}</q-item-label>
-          <q-item-label>{{ mail.date }}</q-item-label>
-        </q-item-section>
-
-        <q-item-section side>
-          <q-btn
-            icon="clear"
-            color="negative"
-            flat
-            @click.stop="deleteMail(mail.id)"
-          />
-        </q-item-section>
-      </q-item>
+      </mail-item-list>
     </q-list>
 
     <q-banner v-if="items.length === 0" class="bg-grey-2 text-black">
@@ -37,21 +24,25 @@
 </template>
 
 <script setup>
+import MailItemList from "./MailItemList.vue";
 import { computed, onMounted } from "vue";
 import { useMailStore } from "src/store/mailStore";
 
 const mailStore = useMailStore();
-
+const emit = defineEmits(["visibleMessage"]);
 const { incomingEmails, fetchIncomingMails, loading, error } = mailStore;
 
 const items = computed(() => mailStore.getIncomingEmails);
-
+const deleteMessage = async (id) => {
+  await mailStore.deleteMail(id);
+};
 onMounted(async () => {
   await fetchIncomingMails();
 });
 
-const selectMail = (id) => {
-  mailStore.fetchMailById(id);
+const selectMail = async (id) => {
+  const { data } = await mailStore.fetchMailById(id);
+  emit("visibleMessage", data);
 };
 
 const deleteMail = async (id) => {

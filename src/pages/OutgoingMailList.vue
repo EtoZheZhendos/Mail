@@ -17,10 +17,13 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useMailStore } from "src/store/mailStore";
 
 const mailStore = useMailStore();
 
 const outgoingMails = computed(() => mailStore.getOutgoingEmails);
+onMounted(async () => {
+  await mailStore.fetchOutgoingMails();
+});
 </script>

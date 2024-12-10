@@ -57,7 +57,8 @@ export const useMailStore = defineStore("mail", {
           url: `/incoming_emails/${id}`,
           method: "GET",
         });
-        this.selectedMail = response.data;
+
+        return response;
       } catch (error) {
         this.error = "Не удалось загрузить письмо. Попробуйте позже.";
       } finally {
@@ -90,11 +91,9 @@ export const useMailStore = defineStore("mail", {
           url: `/incoming_emails/${id}`,
           method: "DELETE",
         });
+        //  Обновление списка после удаления одного письма
 
-        // Обновляем список входящих писем после удаления
-        this.incomingEmails = this.incomingEmails.filter(
-          (mail) => mail.id !== id
-        );
+        await this.fetchIncomingMails();
       } catch (error) {
         this.error = "Не удалось удалить письмо. Попробуйте позже.";
       } finally {

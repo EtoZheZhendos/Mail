@@ -49,9 +49,9 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useMailStore } from "src/store/mailStore.js";
-import MailList from "src/pages/MailList.vue";
-import MailItem from "src/pages/MailItem.vue";
-import OutgoingMailList from "src/pages/OutgoingMailList.vue";
+import MailList from "components/MailList.vue";
+import MailItem from "components/item-for-list/MailItem.vue";
+import OutgoingMailList from "components/lists/OutgoingMailList.vue";
 
 const mailStore = useMailStore();
 const selectedMail = computed(() => mailStore.selectedMail);

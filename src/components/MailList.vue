@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import MailItemList from "./MailItemList.vue";
+import MailItemList from "components/lists/MailItemList.vue";
 import { computed, onMounted } from "vue";
 import { useMailStore } from "src/store/mailStore";
 

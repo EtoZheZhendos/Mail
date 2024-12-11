@@ -8,18 +8,18 @@
       "date": "25-04-2023"
     },
     {
-      "id": "2",
-      "theme": "Уведомление о посылке",
-      "from": "GlebK2002",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
-      "date": "24-05-2022"
-    },
-    {
       "id": "3",
       "theme": "Подтверждение регистрации",
       "from": "AnnaS1990",
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
       "date": "15-06-2023"
+    },
+    {
+      "id": "2",
+      "theme": "Уведомление о посылке",
+      "from": "GlebK2002",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
+      "date": "24-05-2022"
     }
   ],
   "outgoing_emails": [
@@ -46,21 +46,6 @@
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
       "date": "16-06-2023",
       "draft": false
-    },
-    {
-      "id": "4",
-      "theme": "Изменение времени встречи",
-      "to": "DmitryP1985",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
-      "date": "11-07-2023",
-      "draft": false
-    },
-    {
-      "id": "615b",
-      "to": "sss",
-      "theme": "sss",
-      "text": "sss",
-      "draft": true
     }
   ]
 }

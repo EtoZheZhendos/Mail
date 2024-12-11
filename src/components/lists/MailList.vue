@@ -7,9 +7,8 @@
       :key="element.id"
       :data="element"
       is-incoming-mail
-      @changeDraftToOutgoing="handleChangeDraftToOutgoing"
-    >
-    </mail-item-list>
+      @sendDraft="handleSendDraft"
+    />
   </q-list>
 
   <q-banner v-if="items.length === 0" class="bg-grey-2 text-black">
@@ -50,8 +49,12 @@ const selectMail = async (id) => {
   emit("visibleMessage", data);
 };
 
-const handleChangeDraftToOutgoing = (id) => {
-  mailStore.changeDraftToOutgoing(id);
+const handleSendDraft = async (id) => {
+  try {
+    await mailStore.changeDraftToOutgoing(id);
+  } catch (error) {
+    console.error("Ошибка при отправке черновика:", error);
+  }
 };
 
 onMounted(async () => {

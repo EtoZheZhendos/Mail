@@ -18,26 +18,22 @@
         label="Удалить"
         dense
       />
+
       <q-btn
         icon="send"
         color="positive"
         label="Отправить"
         dense
         @click="sendDraftFn"
-        v-if="!!data.draft"
+        v-if="data.draft"
       />
     </q-item-section>
   </q-item>
 </template>
 
 <script setup>
-const emit = defineEmits([
-  "deleteMessage",
-  "openMessage",
-  "sendDraft",
-  "deleteOutgoingItem",
-  "changeDraftToOutgoing",
-]);
+const emit = defineEmits(["deleteMessage", "openMessage", "sendDraft"]);
+
 const props = defineProps({
   data: {
     type: Object,
@@ -58,6 +54,6 @@ const openMessageById = () => {
 };
 
 const sendDraftFn = () => {
-  emit("changeDraftToOutgoing", props.data.id);
+  emit("sendDraft", props.data.id);
 };
 </script>

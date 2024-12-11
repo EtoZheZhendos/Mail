@@ -1,4 +1,3 @@
-<!-- OutgoingMailList.vue -->
 <template>
   <q-page>
     <q-list bordered>
@@ -7,7 +6,9 @@
         :key="mail.id"
         :data="mail"
         @delete-message="fnDeleteMessage"
-      ></mail-item-list>
+        @open-message="selectMail"
+        @send-draft="sendDraftFn"
+      />
     </q-list>
 
     <q-banner v-if="outgoingMails.length === 0" class="bg-grey-2 text-black">
@@ -21,7 +22,7 @@ import { computed, onMounted } from "vue";
 import { useMailStore } from "src/store/mailStore";
 import MailItemList from "./MailItemList.vue";
 
-const emit = defineEmits(["delete-message"]);
+const emit = defineEmits(["visibleMessage", "delete-message", "send-draft"]);
 
 const mailStore = useMailStore();
 
@@ -34,10 +35,23 @@ onMounted(async () => {
 const fnDeleteMessage = async (id) => {
   try {
     await mailStore.deleteOutgoingMail(id);
-
     emit("delete-message", id);
   } catch (error) {
     console.error("Ошибка при удалении письма:", error);
+  }
+};
+
+const selectMail = async (id) => {
+  const { data } = await mailStore.fetchMailByIdOutgoing(id);
+  emit("visibleMessage", data);
+};
+
+const sendDraftFn = async (id) => {
+  try {
+    await mailStore.changeDraftToOutgoing(id);
+    emit("send-draft", id);
+  } catch (error) {
+    console.error("Ошибка при отправке черновика:", error);
   }
 };
 </script>

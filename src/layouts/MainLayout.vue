@@ -2,10 +2,25 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-toolbar-title>Моя Почта</q-toolbar-title>
+        <q-toolbar-title> Моя Почта </q-toolbar-title>
+
+        <q-btn
+          :loading="loading[3]"
+          color="primary"
+          @click="simulateProgress(3)"
+          style="width: 150px; margin-left: 10px"
+        >
+          Обновить
+          <template v-slot:loading>
+            <q-spinner-hourglass class="on-left" />
+            Загружаю...
+          </template>
+        </q-btn>
+
         <q-btn flat label="Отправить письмо" @click="openSendMailDialog" />
       </q-toolbar>
     </q-header>
+
     <q-dialog v-model="sendMailDialogVisible">
       <send-mail-form
         @close-form="sendMailDialogVisible = !sendMailDialogVisible"
@@ -24,27 +39,19 @@ import { useMailStore } from "src/store/mailStore";
 import SendMailForm from "src/components/forms/SendMailForm.vue";
 
 const mailStore = useMailStore();
+const sendMailDialogVisible = ref(false);
+const loading = ref([]);
 
-const recipientEmail = ref("");
-const mailSubject = ref("");
-const mailText = ref("");
-const isDraft = ref(false);
-const sendMailDialogVisible = ref(false); // Референсное значение отображения модального окна
+const simulateProgress = async (number) => {
+  loading.value[number] = true;
+
+  setTimeout(async () => {
+    await mailStore.fetchIncomingMails();
+    loading.value[number] = false;
+  }, 2000);
+};
 
 const openSendMailDialog = () => {
   sendMailDialogVisible.value = !sendMailDialogVisible.value;
-};
-
-const sendMail = async () => {
-  await mailStore.sendMail({
-    recipientEmail: recipientEmail.value,
-    subject: mailSubject.value,
-    text: mailText.value,
-    draft: isDraft.value,
-  });
-  sendMailDialogVisible.value = false;
-  recipientEmail.value = "";
-  mailSubject.value = "";
-  mailText.value = "";
 };
 </script>

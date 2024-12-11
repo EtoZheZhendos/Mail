@@ -117,16 +117,49 @@ export const useMailStore = defineStore("mail", {
     async changeDraftToOutgoing(id) {
       this.loading = true;
       this.error = null;
+
+      const mailToSend = this.outgoingEmails.find((mail) => mail.id === id);
+
+      if (!mailToSend) {
+        this.error = "Письмо не найдено.";
+        this.loading = false;
+        return;
+      }
+
+      const updatedMail = {
+        id: mailToSend.id,
+        theme: mailToSend.theme,
+        to: mailToSend.to,
+        text: mailToSend.text,
+        date: mailToSend.date,
+        draft: false,
+      };
+
       try {
         await api({
           url: `/outgoing_emails/${id}`,
           method: "PUT",
-          data: { draft: false },
+          data: updatedMail,
         });
 
         await this.fetchOutgoingMails();
       } catch (error) {
         this.error = "Не удалось изменить статус письма. Попробуйте позже.";
+      } finally {
+        this.loading = false;
+      }
+    },
+    async fetchMailByIdOutgoing(id) {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await api({
+          url: `/outgoing_emails/${id}`,
+          method: "GET",
+        });
+        return response;
+      } catch (error) {
+        this.error = "Не удалось загрузить письмо. Попробуйте позже.";
       } finally {
         this.loading = false;
       }

@@ -1,60 +1,76 @@
 <template>
-  <q-dialog v-model="dialog" persistent>
-    <q-card>
-      <q-card-section>
-        <div class="text-h6">Отправить письмо</div>
-      </q-card-section>
+  <q-card style="width: 500px">
+    <q-card-section class="row items-center q-pb-none justify-between">
+      <div class="text-h6">Отправить письмо</div>
+      <q-btn icon="close" flat round color="negative" @click="closeFormFunc" />
+    </q-card-section>
 
-      <q-card-section>
-        <q-input
-          v-model="mail.to"
-          label="Кому"
-          :rules="[(val) => (val && val.length >= 2) || 'Минимум 2 символа']"
-        />
-        <q-input v-model="mail.theme" label="Тема" />
-        <q-input
-          v-model="mail.text"
-          label="Сообщение"
-          type="textarea"
-          :rules="[(val) => (val && val.length >= 1) || 'Минимум 1 символ']"
-        />
-      </q-card-section>
+    <q-card-section>
+      <q-input
+        v-model="mail.to"
+        label="Кому"
+        :rules="[(val) => (val && val.length >= 2) || 'Минимум 2 символа']"
+      />
+      <q-input v-model="mail.theme" label="Тема" />
+      <q-input
+        v-model="mail.text"
+        label="Сообщение"
+        type="textarea"
+        :rules="[(val) => (val && val.length >= 1) || 'Минимум 1 символ']"
+      />
 
-      <q-card-actions>
-        <q-btn label="Отправить" color="primary" @click="sendMail" />
-        <q-btn label="Отмена" color="secondary" @click="dialog = false" />
-      </q-card-actions>
-    </q-card>
-  </q-dialog>
+      <q-checkbox
+        v-model="mail.draft"
+        label="Сохранить как черновик"
+        color="primary"
+      />
+    </q-card-section>
+
+    <q-card-actions>
+      <q-btn label="Отправить" color="primary" @click="sendMailFunc" />
+      <q-btn label="Сбросить" color="negative" @click="clearFormFunc" />
+    </q-card-actions>
+  </q-card>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useMailStore } from "src/store/mailStore";
-import { date } from "quasar"; // Для генерации текущей даты
+
+const emit = defineEmits(["closeForm"]);
 
 const mailStore = useMailStore();
-const dialog = ref(false);
 
 const mail = ref({
   to: "",
   theme: "",
   text: "",
-  date: date.formatDate(Date.now(), "DD-MM-YYYY"), // Текущая дата
+  draft: false,
 });
 
-const sendMail = async () => {
+const sendMailFunc = async () => {
   try {
-    // Проверка на валидность
-    const isValid = mail.value.to.length >= 2 && mail.value.text.length >= 1;
-    if (!isValid) {
-      throw new Error("Поля не заполнены корректно");
-    }
+    await mailStore.sendMail({
+      ...mail.value,
+      draft: mail.value.draft,
+    });
 
-    await mailStore.sendMail(mail.value);
-    dialog.value = false;
+    clearFormFunc();
   } catch (error) {
     console.error("Ошибка отправки письма:", error);
   }
+};
+
+const closeFormFunc = () => {
+  emit("closeForm");
+};
+
+const clearFormFunc = () => {
+  mail.value = {
+    to: "",
+    theme: "",
+    text: "",
+    draft: false,
+  };
 };
 </script>

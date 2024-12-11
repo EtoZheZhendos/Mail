@@ -1,13 +1,13 @@
+<!-- OutgoingMailList.vue -->
 <template>
   <q-page>
     <q-list bordered>
-      <q-item v-for="mail in outgoingMails" :key="mail.id" clickable>
-        <q-item-section>
-          <q-item-label>{{ mail.subject }}</q-item-label>
-          <q-item-label caption>{{ mail.recipient }}</q-item-label>
-          <q-item-label>{{ mail.date }}</q-item-label>
-        </q-item-section>
-      </q-item>
+      <mail-item-list
+        v-for="mail in outgoingMails"
+        :key="mail.id"
+        :data="mail"
+        @delete-message="fnDeleteMessage"
+      ></mail-item-list>
     </q-list>
 
     <q-banner v-if="outgoingMails.length === 0" class="bg-grey-2 text-black">
@@ -19,11 +19,25 @@
 <script setup>
 import { computed, onMounted } from "vue";
 import { useMailStore } from "src/store/mailStore";
+import MailItemList from "./MailItemList.vue";
+
+const emit = defineEmits(["delete-message"]);
 
 const mailStore = useMailStore();
 
 const outgoingMails = computed(() => mailStore.getOutgoingEmails);
+
 onMounted(async () => {
   await mailStore.fetchOutgoingMails();
 });
+
+const fnDeleteMessage = async (id) => {
+  try {
+    await mailStore.deleteOutgoingMail(id);
+
+    emit("delete-message", id);
+  } catch (error) {
+    console.error("Ошибка при удалении письма:", error);
+  }
+};
 </script>

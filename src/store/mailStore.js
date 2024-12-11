@@ -1,4 +1,4 @@
-// src/store/mailStore.js
+// mailStore.js
 
 import { defineStore } from "pinia";
 import { api } from "src/boot/axios";
@@ -57,7 +57,6 @@ export const useMailStore = defineStore("mail", {
           url: `/incoming_emails/${id}`,
           method: "GET",
         });
-
         return response;
       } catch (error) {
         this.error = "Не удалось загрузить письмо. Попробуйте позже.";
@@ -91,11 +90,43 @@ export const useMailStore = defineStore("mail", {
           url: `/incoming_emails/${id}`,
           method: "DELETE",
         });
-        //  Обновление списка после удаления одного письма
-
         await this.fetchIncomingMails();
       } catch (error) {
         this.error = "Не удалось удалить письмо. Попробуйте позже.";
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async deleteOutgoingMail(id) {
+      this.loading = true;
+      this.error = null;
+      try {
+        await api({
+          url: `/outgoing_emails/${id}`,
+          method: "DELETE",
+        });
+        await this.fetchOutgoingMails();
+      } catch (error) {
+        this.error = "Не удалось удалить письмо. Попробуйте позже.";
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async changeDraftToOutgoing(id) {
+      this.loading = true;
+      this.error = null;
+      try {
+        await api({
+          url: `/outgoing_emails/${id}`,
+          method: "PUT",
+          data: { draft: false },
+        });
+
+        await this.fetchOutgoingMails();
+      } catch (error) {
+        this.error = "Не удалось изменить статус письма. Попробуйте позже.";
       } finally {
         this.loading = false;
       }

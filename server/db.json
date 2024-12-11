@@ -29,7 +29,7 @@
       "to": "ArseniyK1",
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
       "date": "26-04-2023",
-      "draft": "false"
+      "draft": false
     },
     {
       "id": "2",
@@ -37,7 +37,7 @@
       "to": "GlebK2002",
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
       "date": "25-05-2022",
-      "draft": "false"
+      "draft": false
     },
     {
       "id": "3",
@@ -45,7 +45,7 @@
       "to": "AnnaS1990",
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
       "date": "16-06-2023",
-      "draft": "false"
+      "draft": false
     },
     {
       "id": "4",
@@ -53,38 +53,14 @@
       "to": "DmitryP1985",
       "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
       "date": "11-07-2023",
-      "draft": "false"
-    },
-    {
-      "id": "5",
-      "theme": "Запрос на возврат товара",
-      "to": "ElenaV1995",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deleniti dolorum ducimus ipsam libero nesciunt nulla odio odit quasi tempore?",
-      "date": "23-08-2023",
-      "draft": "false"
-    },
-    {
-      "id": "ef17",
-      "recipientEmail": "123",
-      "theme": "Запрос на возврат товара",
-      "subject": "123",
-      "text": "123",
-      "draft": "true"
-    },
-    {
-      "id": "32dc",
-      "recipientEmail": "s",
-      "theme": "Запрос на возврат товара",
-      "subject": "s",
-      "text": "s",
-      "draft": "true"
-    },
-    {
-      "id": "bcfe",
-      "recipientEmail": "ЫЫ",
-      "subject": "ЫЫ",
-      "text": "уйцуйцуйц",
       "draft": false
+    },
+    {
+      "id": "615b",
+      "to": "sss",
+      "theme": "sss",
+      "text": "sss",
+      "draft": true
     }
   ]
 }

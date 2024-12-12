@@ -17,14 +17,10 @@
         <q-btn
           :loading="loading[3]"
           color="primary"
-          @click="simulateProgress(3)"
+          @click="updateMails"
           style="width: 150px; margin-left: 10px"
         >
           Обновить
-          <template v-slot:loading>
-            <q-spinner-hourglass class="on-left" />
-            Загружаю...
-          </template>
         </q-btn>
 
         <q-btn flat label="Отправить письмо" @click="openSendMailDialog" />
@@ -53,13 +49,9 @@ const sendMailDialogVisible = ref(false);
 const loading = ref([]);
 const search = ref("");
 
-const simulateProgress = async (number) => {
-  loading.value[number] = true;
-
-  setTimeout(async () => {
-    await mailStore.fetchIncomingMails();
-    loading.value[number] = false;
-  }, 2000);
+const updateMails = async () => {
+  await mailStore.fetchIncomingMails();
+  await mailStore.fetchOutgoingMails();
 };
 
 const openSendMailDialog = () => {

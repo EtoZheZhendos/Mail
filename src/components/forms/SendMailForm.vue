@@ -1,7 +1,8 @@
 <template>
   <q-card style="width: 500px">
     <q-card-section class="row items-center q-pb-none justify-between">
-      <div class="text-h6">Отправить письмо</div>
+      <div class="text-h6" v-if="!data?.id">Отправить письмо</div>
+      <div class="text-h6" v-else>Отправить черновик</div>
       <q-btn icon="close" flat round color="negative" @click="closeFormFunc" />
     </q-card-section>
 
@@ -20,6 +21,7 @@
       />
 
       <q-checkbox
+        v-if="!data?.id"
         v-model="mail.draft"
         label="Сохранить как черновик"
         color="primary"
@@ -41,11 +43,18 @@ const emit = defineEmits(["closeForm"]);
 
 const mailStore = useMailStore();
 
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => {},
+  },
+});
+
 const mail = ref({
-  to: "",
-  theme: "",
-  text: "",
-  draft: false,
+  to: props.data?.to || "",
+  theme: props.data?.theme || "",
+  text: props.data?.text || "",
+  draft: props.data?.draft || false,
 });
 
 const sendMailFunc = async () => {
@@ -62,10 +71,18 @@ const sendMailFunc = async () => {
       ...mail.value,
       date: formattedDate,
     };
-
-    await mailStore.sendMail(mailWithDate);
+    if (!props.data?.id) {
+      await mailStore.sendMail(mailWithDate);
+    } else {
+      await mailStore.changeDraftToOutgoing(props.data.id, {
+        ...mail.value,
+        draft: false,
+        date: formattedDate,
+      });
+    }
 
     clearFormFunc();
+    closeFormFunc();
   } catch (error) {
     console.error("Ошибка отправки письма:", error);
   }

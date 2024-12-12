@@ -1,5 +1,3 @@
-// mailStore.js
-
 import { defineStore } from "pinia";
 import { api } from "src/boot/axios";
 
@@ -114,7 +112,7 @@ export const useMailStore = defineStore("mail", {
       }
     },
 
-    async changeDraftToOutgoing(id) {
+    async changeDraftToOutgoing(id, data_draft) {
       this.loading = true;
       this.error = null;
 
@@ -134,12 +132,11 @@ export const useMailStore = defineStore("mail", {
         date: mailToSend.date,
         draft: false,
       };
-
       try {
         await api({
           url: `/outgoing_emails/${id}`,
           method: "PUT",
-          data: updatedMail,
+          data: data_draft?.to ? data_draft : updatedMail,
         });
 
         await this.fetchOutgoingMails();

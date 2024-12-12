@@ -24,7 +24,7 @@
         color="positive"
         label="Отправить"
         dense
-        @click="sendDraftFn"
+        @click.stop="sendDraftFn"
         v-if="data.draft"
       />
     </q-item-section>

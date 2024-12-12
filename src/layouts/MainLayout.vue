@@ -4,6 +4,16 @@
       <q-toolbar>
         <q-toolbar-title> Моя Почта </q-toolbar-title>
 
+        <q-input
+          v-model="search"
+          class="bg-white"
+          outlinded
+          rounded
+          label="Введите поисковое значение"
+          dense
+          style="width: 400px"
+        />
+
         <q-btn
           :loading="loading[3]"
           color="primary"
@@ -34,13 +44,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useMailStore } from "src/store/mailStore";
 import SendMailForm from "src/components/forms/SendMailForm.vue";
 
 const mailStore = useMailStore();
 const sendMailDialogVisible = ref(false);
 const loading = ref([]);
+const search = ref("");
 
 const simulateProgress = async (number) => {
   loading.value[number] = true;
@@ -54,4 +65,14 @@ const simulateProgress = async (number) => {
 const openSendMailDialog = () => {
   sendMailDialogVisible.value = !sendMailDialogVisible.value;
 };
+
+watch(
+  () => search.value,
+  async (value) => {
+    if (value === "") {
+      await mailStore.resetMails();
+    }
+    mailStore.searchMails(search.value);
+  }
+);
 </script>

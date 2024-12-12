@@ -161,5 +161,22 @@ export const useMailStore = defineStore("mail", {
         this.loading = false;
       }
     },
+    searchMails(query) {
+      const lowerCaseQuery = query.toLowerCase();
+
+      this.incomingEmails = this.incomingEmails.filter(
+        (mail) =>
+          mail?.theme?.toLowerCase().includes(lowerCaseQuery) ||
+          mail?.from?.toLowerCase().includes(lowerCaseQuery)
+      );
+
+      this.outgoingEmails = this.outgoingEmails.filter((mail) =>
+        mail?.theme.toLowerCase().includes(lowerCaseQuery)
+      );
+    },
+    async resetMails() {
+      await this.fetchIncomingMails();
+      await this.fetchOutgoingMails();
+    },
   },
 });
